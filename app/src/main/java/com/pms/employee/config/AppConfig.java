@@ -1,4 +1,4 @@
-package com.pms.employee;
+package com.pms.employee.config;
 
 import javax.sql.DataSource;
 import org.apache.ibatis.logging.LogFactory;
@@ -21,11 +21,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@ComponentScan("com.pms.petopia")
+@ComponentScan("com.pms.employee")
 @EnableWebMvc
-@PropertySource("classpath:com/pms/petopia/config/jdbc.properties")
+@PropertySource("classpath:com/pms/employee/config/jdbc.properties")
 @EnableTransactionManagement
-@MapperScan("com.pms.petopia.dao")
+@MapperScan("com.pms.employee.dao")
 public class AppConfig {
 
   @Bean
@@ -55,8 +55,8 @@ public class AppConfig {
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(dataSource);
 
-    sqlSessionFactoryBean.setTypeAliasesPackage("com.pms.petopia.domain");
-    sqlSessionFactoryBean.setMapperLocations(appCtx.getResources("classpath:com/pms/petopia/mapper/*Mapper.xml"));
+    sqlSessionFactoryBean.setTypeAliasesPackage("com.pms.employee.domain");
+    sqlSessionFactoryBean.setMapperLocations(appCtx.getResources("classpath:com/pms/employee/mapper/*Mapper.xml"));
     return sqlSessionFactoryBean.getObject();
 
   }
