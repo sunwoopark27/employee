@@ -1,5 +1,6 @@
 package com.pms.employee.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.pms.employee.dao.EmployeeDao;
@@ -53,6 +54,15 @@ public class DefaultEmployeeService implements EmployeeService {
   @Override
   public int delete(int no) throws Exception {
     return employeeDao.delete(no);
+  }
+
+  @Override
+  public List<Employee> searchByDetail(String item, String keyword) throws Exception {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("item", item);
+    params.put("keyword", keyword);
+
+    return employeeDao.findByDetail(params);
   }
 
   //  // 이름으로 찾기

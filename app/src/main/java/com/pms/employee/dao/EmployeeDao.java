@@ -1,6 +1,7 @@
 package com.pms.employee.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.pms.employee.domain.Employee;
 
 public interface EmployeeDao {
@@ -10,6 +11,8 @@ public interface EmployeeDao {
   List<Employee> findByKeyword(String keyword) throws Exception;
 
   Employee findByNo(int no) throws Exception;
+
+  List<Employee> findByDetail(Map<String,Object> params) throws Exception;
 
   //Employee findByEmailPassword(Map<String,Object> params) throws Exception;
 

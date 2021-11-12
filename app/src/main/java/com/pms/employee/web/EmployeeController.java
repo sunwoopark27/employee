@@ -57,8 +57,23 @@ public class EmployeeController {
   }
 
   @GetMapping("list") 
-  public void list(String keyword, Model model) throws Exception {
-    List<Employee> list = employeeService.list(keyword);
+  public void list(String keyword, String item, Model model) throws Exception {
+
+    List<Employee> list = null;
+    if(item != null && keyword != null && keyword.length() > 0) {
+      System.out.println(keyword);
+      System.out.println(item);
+      list = employeeService.searchByDetail(item, keyword);
+
+      System.out.println(list);
+
+    } else {
+
+      list = employeeService.list(keyword);
+
+      System.out.println(list);
+    }
+    System.out.println(list);
     model.addAttribute("list", list);
   }
 

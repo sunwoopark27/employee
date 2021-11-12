@@ -16,7 +16,7 @@
 <table border='1'>
 <thead>
 <tr>
-<th>번호</th> <th> </th><th>이름</th> <th>이메일</th> <th>전화</th>
+<th>번호</th> <th>이름</th><th>직급</th> <th>이메일</th> <th>전화</th>
 </tr>
 </thead>
 <tbody>
@@ -36,9 +36,22 @@
 </table>
 
 <form action='list' method='get'>
+<select name='item'>
+   <option value='0' ${param.item == "0" ? "selected" : ""}>전체</option>
+   <option value='1' ${param.item == "1" ? "selected" : ""}>번호</option>
+   <option value='2' ${param.item == "2" ? "selected" : ""}>직급</option>
+   <option value='3' ${param.item == "3" ? "selected" : ""}>이름</option>
+   <option value='4' ${param.item == "4" ? "selected" : ""}>전화번호</option>
+   <option value='5' ${param.item == "5" ? "selected" : ""}>이메일</option>
+</select>
 <input type='search' name='keyword' value='${param.keyword}'> 
 <button>검색</button>
 </form>
+
+<%-- <form action='list' method='get'>
+<input type='search' name='keyword' value='${param.keyword}'> 
+<button>검색</button>
+</form> --%>
 </body>
 </html>
 

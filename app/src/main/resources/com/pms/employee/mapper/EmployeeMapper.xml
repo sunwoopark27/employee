@@ -60,14 +60,32 @@
     where no = #{value}
   </select>
   
-  <select id="findByEmailPassword" resultMap="employeeMap" parameterType="map">
+  <select id="findByDetail" resultMap="employeeMap" parameterType="map">
     select 
       no,
       name,
       email,
-      photo
+      position,
+      tel
     from employee 
-    where email = #{email} and password = password(#{password})
+    <where> 
+      <if test="item == 1 or item == 0">
+        no like concat('%', #{keyword}, '%')
+      </if>
+      <if test="item == 2 or item == 0">
+        or position like concat('%', #{keyword}, '%')
+      </if>
+      <if test="item == 3 or item == 0">
+        or name like concat('%', #{keyword}, '%')
+      </if>
+      <if test="item == 4 or item == 0">
+        or tel like concat('%', #{keyword}, '%')
+      </if>
+      <if test="item == 5 or item == 0">
+        or email like concat('%', #{keyword}, '%')
+      </if>
+    </where>
+    order by name asc
   </select>
   
   <update id="update" parameterType="employee">

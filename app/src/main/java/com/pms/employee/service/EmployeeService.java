@@ -11,6 +11,8 @@ public interface EmployeeService {
 
   Employee get(int no) throws Exception;
 
+  List<Employee> searchByDetail(String item, String keyword) throws Exception;
+
   //Employee get(String email, String password) throws Exception;
 
   int update(Employee employee) throws Exception;
