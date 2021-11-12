@@ -1,5 +1,7 @@
 package com.pms.employee.web;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,5 +95,27 @@ public class EmployeeController {
     employeeService.update(employee);
 
     return "redirect:list";
+  }
+
+  @PostMapping("savecsv")
+  public void saveCsv(String keyword) throws Exception{
+
+    try (BufferedWriter out = new BufferedWriter(new FileWriter("employees.csv"))) {
+
+      List<Employee> employeeList = employeeService.list(keyword);
+      // boards.csv 파일 포맷
+      // - 번호,제목,내용,작성자,등록일,조회수(CRLF)
+      for (Employee e : employeeList) {
+        out.write(e.toCsvString() + "\n");
+        System.out.println(e.toCsvString()+"\n");
+      }
+      System.out.println(employeeList);
+      System.out.println("직원 데이터 저장!");
+
+    } catch (Exception e) {
+      System.out.println("게시글 데이터를 파일로 저장하는 중에 오류 발생!");
+    }
+
+
   }
 }

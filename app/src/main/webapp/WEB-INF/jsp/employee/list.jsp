@@ -48,6 +48,11 @@
 <button>검색</button>
 </form>
 
+<form action='savecsv' method='post'>
+<input type="hidden" name='keyword' value='${param.keyword}'>
+<button>csv 다운</button>
+</form>
+
 <%-- <form action='list' method='get'>
 <input type='search' name='keyword' value='${param.keyword}'> 
 <button>검색</button>

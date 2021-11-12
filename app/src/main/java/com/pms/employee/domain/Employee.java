@@ -9,14 +9,37 @@ public class Employee {
   private String position;
   private String tel;
 
-  //  public Employee(String csv) {
-  //    String[] fields = csv.split(",");
-  //    this.setNo(Integer.parseInt(fields[0]));
-  //    this.setName(fields[1]);
-  //    this.setEmail(fields[2]);
-  //    this.setPosition(fields[3]);
-  //    this.setTel(fields[5]);
-  //  }
+  public Employee() {}
+
+  public Employee(String csv) {
+    String[] fields = csv.split(",");
+    this.setNo(Integer.parseInt(fields[0]));
+    this.setName(fields[1]);
+    this.setEmail(fields[2]);
+    this.setPosition(fields[3]);
+    this.setTel(fields[5]);
+  }
+
+  public String toCsvString() {
+    return String.format("%d,%s,%s,%s,%s", 
+        this.getNo(),
+        this.getName(),
+        this.getEmail(),
+        this.getPosition(),
+        this.getTel());
+  }
+
+  public static Employee valueOfCsv(String csv) {
+    String[] fields = csv.split(",");
+    Employee employee = new Employee();
+    employee.setNo(Integer.parseInt(fields[0]));
+    employee.setName(fields[1]);
+    employee.setEmail(fields[2]);
+    employee.setPosition(fields[3]);
+    employee.setTel(fields[5]);
+    return employee;
+  }
+
 
 
   @Override
