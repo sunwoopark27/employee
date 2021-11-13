@@ -1,8 +1,8 @@
 package com.pms.employee.web;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.OutputStream;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -98,24 +98,27 @@ public class EmployeeController {
   }
 
   @PostMapping("savecsv")
-  public void saveCsv(String keyword) throws Exception{
+  public void saveCsv(String keyword, HttpServletResponse response) throws Exception{
 
-    try (BufferedWriter out = new BufferedWriter(new FileWriter("employees.csv"))) {
+    List<Employee> employeeList = employeeService.list(keyword);
+    StringBuffer sb = new StringBuffer();
+    sb.append("no, name, email, position, tel");
 
-      List<Employee> employeeList = employeeService.list(keyword);
-      // boards.csv 파일 포맷
-      // - 번호,제목,내용,작성자,등록일,조회수(CRLF)
-      for (Employee e : employeeList) {
-        out.write(e.toCsvString() + "\n");
-        System.out.println(e.toCsvString()+"\n");
-      }
-      System.out.println(employeeList);
-      System.out.println("직원 데이터 저장!");
-
-    } catch (Exception e) {
-      System.out.println("게시글 데이터를 파일로 저장하는 중에 오류 발생!");
+    for (Employee e : employeeList) {
+      String row = e.toCsvString();
+      sb.append("\n");
+      sb.append(row);
     }
 
+    response.setContentType("text/csv");
+    response.setHeader("Content-Disposition", "attachment; filename=\"employees.csv\"");
+    response.setHeader("Content-Type", "text/csv; charset=MS949");
 
+    OutputStream outputStream = response.getOutputStream();
+    outputStream.write(sb.toString().getBytes("MS949"));
+    outputStream.flush();
+    outputStream.close();
+
+    sb.setLength(0);
   }
 }

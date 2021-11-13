@@ -8,11 +8,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>회원</title>
+<title>직원 리스트</title>
 </head>
 <body>
-<h1>회원(JSP + JSP 액션태그 + EL + JSTL)</h1>
-<p><a href='form'>새 회원</a></p>
+<h1>직원</h1>
+<p><a href='form'>새 직원</a></p>
 <table border='1'>
 <thead>
 <tr>
