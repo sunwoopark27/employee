@@ -6,10 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>직원상세정보</title>
+<title>직원 상세 정보</title>
 </head>
 <body>
-<h1>직원상세정보</h1>
+<h1>직원 상세 정보</h1>
 
 <c:if test="${not empty employee}">
   
